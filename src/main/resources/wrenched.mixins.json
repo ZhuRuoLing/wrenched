@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "icu.takeneko.wrenched.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PistonBaseBlockMixin"
+  ],
+  "client": [
+    "SectionCompilerMixin",
+    "compat.EmbChunkBuilderMeshingTaskMixin",
+    "compat.SodiumChunkBuilderMeshingTaskMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
