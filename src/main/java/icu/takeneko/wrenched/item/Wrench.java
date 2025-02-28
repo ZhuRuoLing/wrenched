@@ -25,13 +25,14 @@ public class Wrench extends Item {
 
     public static boolean ableToUseWrench(Level level, BlockPos pos, Player entity) {
         BlockState state = level.getBlockState(pos);
+
         if (state.getBlock() instanceof WrenchedBlockExtension extension) {
             return extension.wrenched$checkBlockState(state);
         }
         return true;
     }
 
-    public static Property<?> findChangeableProperty(BlockState state) {
+    public static Property<?> findModifyableProperty(BlockState state) {
         Property<?> result = null;
         if (state.getBlock() instanceof WrenchedBlockExtension changeable) {
             result = changeable.wrenched$getProperty(state);

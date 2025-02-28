@@ -1,4 +1,7 @@
 {
   "itemGroup.wrenched": "Wrenched",
-  "item.wrenched.wrench": "Wrench"
+  "item.wrenched.wrench": "Wrench",
+  "tooltip.wrenched.wrench.1": "Right click block to cycle between states.",
+  "tooltip.wrenched.wrench.2": "Hold to select one exactly state.",
+  "wrenched.configuration.shouldWrenchAE2Blocks": "shouldWrenchAE2Blocks"
 }

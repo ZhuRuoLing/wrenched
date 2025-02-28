@@ -3,6 +3,7 @@ package icu.takeneko.wrenched.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import icu.takeneko.wrenched.client.screen.WrenchScreen;
+import icu.takeneko.wrenched.compat.appeng.AppEngCompat;
 import icu.takeneko.wrenched.item.Wrench;
 import icu.takeneko.wrenched.util.StateUtil;
 import icu.takeneko.wrenched.util.WrenchedBlockExtension;
@@ -34,29 +35,30 @@ public class WrenchedClientEvents {
     @SubscribeEvent
     public static void wrenchUse(PlayerInteractEvent.RightClickBlock event) {
         InteractionHand hand = event.getHand();
-        if (event.getEntity().getItemInHand(hand).getItem() instanceof Wrench) {
+        if (event.getEntity().getItemInHand(hand).getItem() instanceof Wrench && !event.getEntity().isShiftKeyDown()) {
             if (Wrench.ableToUseWrench(event.getLevel(), event.getPos(), event.getEntity())) {
                 BlockState targetBlockState = event.getLevel().getBlockState(event.getPos());
-                if (event.getLevel().isClientSide()) {
-                    clientHandle(event, targetBlockState, hand);
+                if (event.getLevel().isClientSide() && clientHandle(event, targetBlockState, hand)) {
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
                 }
-                event.setCancellationResult(InteractionResult.SUCCESS);
-                event.setCanceled(true);
             }
         }
     }
 
 
-    private static void clientHandle(PlayerInteractEvent.RightClickBlock event, BlockState targetBlockState, InteractionHand hand) {
-        Property<?> property = Wrench.findChangeableProperty(targetBlockState);
+    private static boolean clientHandle(PlayerInteractEvent.RightClickBlock event, BlockState targetBlockState, InteractionHand hand) {
+        Property<?> property = Wrench.findModifyableProperty(targetBlockState);
         if (!event.getEntity().isShiftKeyDown()
             && Wrench.ableToUseWrench(event.getLevel(), event.getPos(), event.getEntity())
             && property != null
         ) {
             if (targetBlockState.getBlock() instanceof WrenchedBlockExtension ext && !ext.wrenched$checkBlockState(targetBlockState))
-                return;
+                return false;
             if (!event.getEntity().getAbilities().mayBuild)
-                return;
+                return false;
+            if (!WrenchedClientConfig.shouldWrenchAE2Blocks && AppEngCompat.checkIsAppEngFullOrientationBlock(targetBlockState))
+                return false;
             List<BlockState> possibleStates = StateUtil.findPossibleStatesForProperty(targetBlockState, property);
             if (!possibleStates.isEmpty()) {
                 Minecraft.getInstance().setScreen(new WrenchScreen(
@@ -65,8 +67,10 @@ public class WrenchedClientEvents {
                     property,
                     possibleStates
                 ));
+                return true;
             }
         }
+        return false;
     }
 
     @SubscribeEvent

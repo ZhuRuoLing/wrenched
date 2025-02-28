@@ -32,14 +32,6 @@
       "values": [
         0.0
       ]
-    },
-    {
-      "name": "AntiAliasingRadius",
-      "type": "float",
-      "count": 1,
-      "values": [
-        1.5
-      ]
     }
   ]
 }

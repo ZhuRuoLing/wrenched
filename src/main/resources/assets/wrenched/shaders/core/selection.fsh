@@ -6,7 +6,6 @@ uniform vec4 ColorModulator;
 uniform vec2 FramebufferSize;
 uniform vec2 Center;
 uniform float Radius;
-uniform float AntiAliasingRadius;
 
 out vec4 fragColor;
 

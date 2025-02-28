@@ -2,6 +2,7 @@ package icu.takeneko.wrenched;
 
 import icu.takeneko.wrenched.networking.WrenchedNetworking;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,6 @@ public class Wrenched {
 
     public Wrenched(IEventBus modEventBus, ModContainer modContainer) {
         WrenchedItems.register(modEventBus);
-
         modEventBus.addListener(Wrenched::registerPayload);
         LOGGER.info("HELLO WORLD!");
     }

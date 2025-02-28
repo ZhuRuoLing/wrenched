@@ -554,13 +554,4 @@ public class WrenchScreen extends Screen {
         return WrenchedClient.TRANSLUCENT_COLORED_OVERLAY;
     }
 
-    private record SelectionItem(
-        Vector2f center,
-        float angle,
-        float detectionAngleStart,
-        float detectionAngleEnd,
-        BlockState state,
-        Component description
-    ) {
-    }
 }

@@ -12,6 +12,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 import static net.minecraft.client.renderer.RenderStateShard.BLOCK_SHEET_MIPPED;
 import static net.minecraft.client.renderer.RenderStateShard.LIGHTMAP;
@@ -65,5 +68,7 @@ public class WrenchedClient {
 
     public WrenchedClient(IEventBus bus, ModContainer container) {
         bus.addListener(WrenchedShaders::register);
+        container.registerConfig(ModConfig.Type.CLIENT, WrenchedClientConfig.SPEC);
+        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }

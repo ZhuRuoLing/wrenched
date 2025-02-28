@@ -1,4 +1,7 @@
 {
   "itemGroup.wrenched": "扳了",
-  "item.wrenched.wrench": "扳手"
+  "item.wrenched.wrench": "扳手",
+  "tooltip.wrenched.wrench.1": "右键点击方块在状态之间循环",
+  "tooltip.wrenched.wrench.2": "右键按住以选择一个状态",
+  "wrenched.configuration.shouldWrenchAE2Blocks": "shouldWrenchAE2Blocks"
 }
