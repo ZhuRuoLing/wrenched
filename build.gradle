@@ -27,6 +27,14 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+    maven { // Create Mod
+        name = "Create Mod Maven"
+        url = "https://maven.createmod.net"
+    }
+    maven {  // ForgeConfigAPIPort
+        name = "ForgeConfigAPIPort Maven"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+    }
 }
 
 base {
@@ -125,6 +133,10 @@ dependencies {
     compileOnly("maven.modrinth:embeddium:1.0.11+mc1.21.1")
     compileOnly("maven.modrinth:iris:1.8.1+1.21.1-neoforge")
     compileOnly("maven.modrinth:ae2:19.0.27")
+    compileOnly("com.simibubi.create:create-1.21.1:6.0.1-18")
+    compileOnly("net.createmod.ponder:Ponder-NeoForge-1.21.1:1.0.43")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.1-11")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.1-11")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

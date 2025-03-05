@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
@@ -32,7 +33,7 @@ import java.util.List;
 @EventBusSubscriber(Dist.CLIENT)
 public class WrenchedClientEvents {
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void wrenchUse(PlayerInteractEvent.RightClickBlock event) {
         InteractionHand hand = event.getHand();
         if (event.getEntity().getItemInHand(hand).getItem() instanceof Wrench && !event.getEntity().isShiftKeyDown()) {
